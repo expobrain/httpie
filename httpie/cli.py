@@ -652,3 +652,20 @@ troubleshooting.add_argument(
 
     """
 )
+
+
+#######################################################################
+# Curl
+#######################################################################
+
+curl = parser.add_argument_group(title='Curl')
+
+curl.add_argument(
+    '--as-curl',
+    action='store_true',
+    default=False,
+    help="""
+    Output the HTTPie command as cURL
+
+    """
+)

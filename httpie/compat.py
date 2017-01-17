@@ -32,6 +32,13 @@ except ImportError:  # pragma: no cover
     from urlparse import urlsplit
 
 try:  # pragma: no cover
+    # noinspection PyUnresolvedReferences,PyCompatibility
+    from urllib.parse import urlencode
+except ImportError:  # pragma: no cover
+    # noinspection PyUnresolvedReferences,PyCompatibility
+    from urllib import urlencode
+
+try:  # pragma: no cover
     # noinspection PyCompatibility
     from urllib.request import urlopen
 except ImportError:  # pragma: no cover

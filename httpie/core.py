@@ -10,6 +10,7 @@ Invocation flow:
   5. Exit.
 
 """
+import os
 import sys
 import errno
 import platform
@@ -24,6 +25,7 @@ from httpie.client import get_response
 from httpie.downloads import Downloader
 from httpie.context import Environment
 from httpie.plugins import plugin_manager
+from httpie.output.formatters.curl import as_curl
 from httpie.output.streams import (
     build_output_stream,
     write_stream,
@@ -85,6 +87,14 @@ def program(args, env, log_error):
     exit_status = ExitStatus.SUCCESS
     downloader = None
     show_traceback = args.debug or args.traceback
+
+    if args.as_curl:
+        cmd = as_curl(args)
+
+        env.stdout.writelines(" ".join(cmd))
+        env.stdout.write(os.linesep)
+
+        return exit_status
 
     try:
         if args.download:
